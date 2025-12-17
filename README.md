@@ -21,6 +21,7 @@ OMDb API kullanarak film arama ve detay görüntüleme uygulaması.
 ```bash
 npm install
 npm run dev
+API key gerekli
 ```
 
 ## 👨‍💻 Geliştirici
