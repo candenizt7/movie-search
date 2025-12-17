@@ -11,7 +11,7 @@ function App() {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [favorites, setFavorites] = useState(() => {
     const saved = localStorage.getItem('favorites');
-    return saved ? JSON.parse(saved) : []; 
+    return saved ? JSON.parse(saved) : [];
   })
 
   useEffect(() => {
@@ -20,7 +20,7 @@ function App() {
 
   const searchMovies = async (searchQuery) => {
     // 1. Boşsa aramayı durdur
-    if(!searchQuery.trim()) return;
+    if (!searchQuery.trim()) return;
 
     // 2. api çağırma
     try {
@@ -50,7 +50,8 @@ function App() {
     console.log("Tıklanan film ID:", movieId);
 
     try {
-      const url = `https://www.omdbapi.com/?apikey=40e7551&i=${movieId}`;
+      const API_KEY = import.meta.env.VITE_OMDB_API_KEY;
+      const url = `https://www.omdbapi.com/?apikey=${API_KEY}&i=${movieId}`;
       const response = await fetch(url);
       const data = await response.json();
 
@@ -72,9 +73,9 @@ function App() {
       <h1>🎬Film Arama</h1>
 
       <SearchBar
-        searchTerm = {searchTerm}
-        setSearchTerm = {setSearchTerm}
-        onSearch = {searchMovies}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        onSearch={searchMovies}
       />
 
       {loading && <p>Yükleniyor...</p>}
@@ -82,9 +83,9 @@ function App() {
       {error && <p>{error}</p>}
 
       {!loading && !error && movies.length > 0 && (
-        <MovieList 
+        <MovieList
           movies={movies}
-          onMovieClick={handleMovieClick}  
+          onMovieClick={handleMovieClick}
         />
       )}
 
